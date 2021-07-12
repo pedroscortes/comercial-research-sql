@@ -14,13 +14,13 @@ FROM
         INNER JOIN
     pipedrive_activities ON pipedrive_activities.deal_id = pipedrive_deals.pipedrive_id
 -- you should use composite key here because we wanna be sure any line will be duplicated and we are looking to the crm of a specific customer     
-        AND pipedrive_deals.salesfarm_ref_id = pipedrive_activities.salesfarm_ref_id
+        AND pipedrive_deals.company_ref_id = pipedrive_activities.company_ref_id
 -- this other join enable us to look for the activity from the icon perspective, minimizing errors        
         INNER JOIN
     activity_types ON pipedrive_activities.type = activity_types.key_string
-        AND pipedrive_activities.salesfarm_ref_id = activity_types.salesfarm_ref_id
+        AND pipedrive_activities.company_ref_id = activity_types.company_ref_id
 WHERE
-    pipedrive_deals.salesfarm_ref_id = 205
+    pipedrive_deals.company_ref_id = 205
         AND pipedrive_activities.done = 1
         AND pipedrive_activities.marked_as_done_time BETWEEN '2021-05-01 00:00:00' AND '2021-05-31 23:59:59'
         AND (activity_types.icon_key = 'finish'
