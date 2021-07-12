@@ -1,5 +1,5 @@
--- in this query we select the add_time and the marked_as_done_time of the first activity done in the deal to find the lead time of the first follow up
--- we use a sub query so we can extract attributes specific from the first activity of the deal
+-- in this query we select the add_time and the time the deal gets into a specific stage to find how much time the lead spends to give a first response
+-- we use a sub query so we can extract attributes specific from a femomn that happens just one time per deal
 -- in this databank specifically we have different time zones (the add_time column for example is stored in GMT+0, but data_entrada uses GMT - 03:00)
 SELECT 
     pipedrive_deals.pipedrive_id,
