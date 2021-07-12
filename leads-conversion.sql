@@ -1,3 +1,6 @@
+--we built this query to dimension the conversion of the sdr's individually so we can look deeply for possible outliers
+--at the selection we use a simple binary logic simmilar to what we usually do in python to count leads with different status
+--we use group by in the owner_name column so we can make sure that we are dimensioning the conversions individually
 SELECT 
     pipedrive_deals.owner_name,
     round(sum(case
@@ -13,9 +16,9 @@ FROM
     pipedrive_deals
         INNER JOIN
     pipedrive_activities ON pipedrive_activities.deal_id = pipedrive_deals.pipedrive_id
-        AND pipedrive_activities.salesfarm_ref_id = pipedrive_deals.salesfarm_ref_id
+        AND pipedrive_activities.salesfarm_ref_id = pipedrive_deals.company_ref_id
 WHERE
     pipedrive_activities.done = 1
-    and pipedrive_deals.salesfarm_ref_id = 1860
-    and pipedrive_activities.marked_as_done_time between "2021-05-01 00:00:00" and "2021-05-31 23:59:59"
+    and pipedrive_deals.company_ref_id = --insert id
+    and pipedrive_activities.marked_as_done_time between --insert date range
     group by pipedrive_deals.owner_name;
