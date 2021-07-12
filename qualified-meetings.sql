@@ -13,7 +13,8 @@ FROM
 -- this join is necessary because we are looking for activities from the perspective of the deal, the meeting is a special activity that happens just one time per lead         
         INNER JOIN
     pipedrive_activities ON pipedrive_activities.deal_id = pipedrive_deals.pipedrive_id
--- you should use composite key here because we wanna be sure any line will be duplicated and we are looking to the crm of a specific customer     
+-- you should use composite key here because we wanna be sure any line will be duplicated and we are looking to the crm of a specific customer, we created this column "company_ref_id" that is present in many different tables so we're able to search for objects from specific companies
+-- we also have a table named companies where you can find all the company_ref_id's with some other basic information from the company registration
         AND pipedrive_deals.company_ref_id = pipedrive_activities.company_ref_id
 -- this other join enable us to look for the activity from the icon perspective, minimizing errors        
         INNER JOIN
